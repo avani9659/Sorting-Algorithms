@@ -2,7 +2,8 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        int[] array = new int[] { 5, 7, 3, 1, 9, 0, 6, 10, 8};
+        //Bubble sort, selection sort, insertion sort are also called in-place sorting algorithms as new arrays are not created.
+        //Space complexity for all three of them is O(1).
 
         /**
          * In bubble sort, we go through every element one by one and swap each element based on the sorting order required.
@@ -11,16 +12,20 @@ public class Main {
          * In each iteration, the next highest number is pushed to the end.
          * Time complexity - O(N^2) (worst case scenario)
          */
-        bubbleSort(array);
+        bubbleSort(new int[] { 5, 7, 3, 1, 9, 0, 6, 10, 8});
 
-        bubbleSortOptimized(array);
+        bubbleSortOptimized(new int[] { 5, 7, 3, 1, 9, 0, 6, 10, 8});
 
         /**
          * Time complexity - O(N^2) (worst case scenario)
          * Even though the time complexity of bubble sort and selection sort is same, selection sort is faster than bubble sort.
          * This is because the number of expensive steps (number of swaps) is far less in selection sort than bubble sort.
          */
-        selectionSort(array);
+        selectionSort(new int[] { 5, 7, 3, 1, 9, 0, 6, 10, 8});
+
+        insertionSort(new int[] { 5, 7, 3, 1, 9, 0, 6, 10, 8});
+
+        insertionSortDescending(new int[] { 5, 7, 3, 1, 9, 0, 6, 10, 8});
     }
 
     /**
@@ -92,6 +97,48 @@ public class Main {
             swapElements(i, min, arr);
         }
 
+        System.out.println(Arrays.toString(arr));
+    }
+
+    /**
+     * Insertion sort algorithm (also called as Online sorting algorithm)
+     * This algorithm is mainly used when you already have a sorted array, and have to insert a new element in this sorted array.
+     * For any given array, we check for all the elements that are smaller than current element. If current element is smaller than the element to left, it is swapped.
+     * Iteration generally starts from 2nd element in array.
+     * Time complexity in worst case(outer loop runs N times. Inner loop also runs N times) = O(N^2)
+     * Space complexity (we are not using any space (not creating any new array)) = O(1)
+     *
+     * @param arr The given array.
+     */
+    public static void insertionSort(int[] arr){
+        for(int i = 1; i < arr.length; i++){
+            int value = arr[i];
+            int j = i;
+
+            while (j >= 1 && arr[j-1] > value){
+                arr[j] = arr[j-1];
+                j--;
+            }
+
+            arr[j] = value;
+        }
+
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void insertionSortDescending(int[] arr){
+        for(int i = 1; i < arr.length; i++){
+            int value = arr[i];
+            int j = i;
+
+            while (j >= 1 && arr[j-1] < value){
+                arr[j] = arr[j-1];
+                j--;
+            }
+
+            arr[j] = value;
+        }
+        
         System.out.println(Arrays.toString(arr));
     }
 
